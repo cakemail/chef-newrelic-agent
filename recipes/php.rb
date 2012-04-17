@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-require_recipe "newrelic::default"
+require_recipe "newrelic_agent::default"
 
 package "newrelic-php5" do
   action :install
@@ -59,7 +59,7 @@ template "/etc/php5/conf.d/newrelic.ini" do
   group "root"
   mode "0644"
   variables(
-    :appname => node[:newrelic][:appname],
+    :appname => node[:newrelic_agent][:appname],
     :params => node
   )
   notifies :restart, resources(:service => "apache2"), :immediately
@@ -72,11 +72,11 @@ template "/etc/newrelic/newrelic.cfg" do
   group "root"
   mode "0644"
   variables(
-    :license_key => node[:newrelic][:license_key],
-    :loglevel => node[:newrelic][:loglevel],
-    :logfile => node[:newrelic][:logfile],
-    :pidfile => node[:newrelic][:pidfile],
-    :collector => node[:newrelic][:daemon][:collector_host]
+    :license_key => node[:newrelic_agent][:license_key],
+    :loglevel => node[:newrelic_agent][:loglevel],
+    :logfile => node[:newrelic_agent][:logfile],
+    :pidfile => node[:newrelic_agent][:pidfile],
+    :collector => node[:newrelic_agent][:daemon][:collector_host]
   )
 end
 
@@ -87,8 +87,8 @@ template "/etc/newrelic/newrelic.yml" do
   group "root"
   mode "0644"
   variables(
-    :license_key => node[:newrelic][:license_key],
-    :appname => node[:newrelic][:appname],
+    :license_key => node[:newrelic_agent][:license_key],
+    :appname => node[:newrelic_agent][:appname],
     :params => node
   )
 end

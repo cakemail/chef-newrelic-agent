@@ -10,6 +10,8 @@ recipe            "newrelic_agent::ruby", "Install New Relic for Ruby"
 recipe            "newrelic_agent::java", "Install New Relic for Java"
 recipe            "newrelic_agent::python", "Install New Relic for Python."
 
+depends           "apt"
+
 %w{ debian ubuntu centos suse fedora redhat}.each do |os|
   supports os
 end
